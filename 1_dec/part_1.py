@@ -1,5 +1,3 @@
-
-
 def get_input_as_int(filename):
     with open(filename, 'r') as file:
         left, right = zip(*[line.split() for line in file])

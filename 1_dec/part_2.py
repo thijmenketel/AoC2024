@@ -1,8 +1,4 @@
-
-def get_input_as_int(filename):
-    with open(filename, 'r') as file:
-        left, right = zip(*[line.split() for line in file])
-    return list(map(int, left)), list(map(int, right))
+from part_1 import get_input_as_int
 
 def main():
     left, right = get_input_as_int('./input.txt')

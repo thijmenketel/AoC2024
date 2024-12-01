@@ -1,3 +1,6 @@
 .vscode
 .idea
+
 **/input.txt
+
+**/__pycache__/*
