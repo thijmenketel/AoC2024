@@ -4,7 +4,7 @@ def get_input_as_string(filename):
         return [line.strip() for line in file]
     
 def count_xmas(string):
-    return string.count("XMAS")
+    return string.count("XMAS") + string.count("SAMX")
 
 def get_diagonal(text):
     diags = []
@@ -21,22 +21,12 @@ def get_diagonal(text):
         if len(diag) > 3: diags.append(diag)
     return diags
 
-def reverse_text(text):
-    return [x[::-1] for x in text]
-
 def count_text(text):
-    transposed = [''.join(list(x)) for x in zip(*text)]
-    diagonal_lr = get_diagonal(text)
-    diagonal_rl = get_diagonal([x[::-1] for x in text])
     options = [
         *text,
-        *reverse_text(text),
-        *transposed,
-        *reverse_text(transposed),
-        *diagonal_lr,
-        *reverse_text(diagonal_lr),
-        *diagonal_rl,
-        *reverse_text(diagonal_rl)
+        *[''.join(list(x)) for x in zip(*text)],
+        *get_diagonal(text),
+        *get_diagonal([x[::-1] for x in text]),
     ]
     return sum(map(count_xmas, options))
 
