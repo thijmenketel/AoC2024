@@ -6,6 +6,7 @@ parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir)
 
 from util import timer
+from operator import mul, add
 
 def get_input(filename):
     with open(filename, 'r') as file:
@@ -15,25 +16,17 @@ def get_input(filename):
             data[int(answer)] = list(map(int, vars.strip().split(' ')))
     return data
 
-def add(a,b): return a + b
-def mul(a,b): return a * b
-
-def get_option(vars, opt):
-    order = list(reversed(bin(opt)[2:].zfill(len(vars)-1)))
-    ops = {'0': add, '1': mul}
-    result = vars[0]
-    for op, var in zip(order, vars[1:]):
-        result = ops[op](result, var)
-    return result
+def check_answer(answer, partial, vars):
+    if not vars:
+        return answer == partial
+    for op in [mul, add]:
+        if check_answer(answer, op(partial, vars[0]), vars[1:]):
+            return True
+    return False
 
 def is_correct_answer(line):
     answer, vars = line
-    options = pow(2, len(vars)-1)
-    for opt in range(options):
-        option = get_option(vars, opt)
-        if option == answer:
-            return True
-    return False
+    return check_answer(answer, vars[0], vars[1:])
 
 def main():
     data = get_input('./input.txt')
