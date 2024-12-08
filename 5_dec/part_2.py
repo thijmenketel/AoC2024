@@ -1,3 +1,4 @@
+from copy import deepcopy
 import sys
 import os
 
@@ -25,24 +26,28 @@ def is_valid_num(num, rules, page):
         if rule in page
     )
 
-def sort_pages(pages, rules_dicts):
+def sort_pages2(pages, rules_dicts):
     left, right = rules_dicts
-    sorted = []
-    for num in pages:
-        if not sorted:
-            sorted.append(num)
-            continue
-        is_before = left.get(num, [])
-        is_after = right.get(num, [])
-        if not is_before:
-            sorted.append(num)
-            continue
-        curr = 0
-        for n in sorted:
-            if n in is_after:
-                curr += 1
-        sorted.insert(curr, num)
-    return sorted
+    for num in deepcopy(pages):
+        left_to = right.get(num, [])
+        idx_to_insert = 0
+        for idx in range(len(pages)):
+            if pages[idx] in left_to:
+                idx_to_insert = idx
+            pages.insert(idx_to_insert, pages.pop(pages.index(num)))
+    print(pages)
+    return pages
+
+def sort_page(page, rules_dict):
+    left, right = rules_dict
+    copy = page[:]
+    while not is_valid_page(copy, left):
+        for num in page:
+            if num not in left: continue
+            for idx in range(len(page)):
+                if not is_valid_num(num, left[num], copy):
+                    copy.insert(idx, copy.pop(copy.index(num)))
+    return copy
 
 def to_dicts(rules):
     rules_dict_left = {}
@@ -56,7 +61,7 @@ def main():
     rules, pages = get_input('./input.txt')
     rules_dicts = to_dicts(rules)
     sorted_pages = map(
-        lambda pages: sort_pages(pages, rules_dicts), 
+        lambda pages: sort_page(pages, rules_dicts), 
         get_invalid_pages(pages, rules_dicts[0])
     )
     print(sum(map(get_middle, sorted_pages)))

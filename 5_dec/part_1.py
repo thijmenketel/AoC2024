@@ -38,7 +38,7 @@ def to_dict(rules):
     return rules_dict
             
 def main():
-    rules, pages = get_input('./input.txt')
+    rules, pages = get_input('./input4.txt')
     rules_dict = to_dict(rules)
     correct_pages = list(filter(lambda page: is_valid_page(page, rules_dict), pages))
     print(sum(map(get_middle, correct_pages)))
