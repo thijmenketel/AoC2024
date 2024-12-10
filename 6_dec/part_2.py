@@ -23,7 +23,6 @@ def print_grid(grid):
 def test_grid(grid, pos, dir):
     x, y = next_pos(pos, dir)
     rights = []
-    right = None
     while is_pos_in_grid(grid, (x, y)):
         match grid[x][y]:
             case '.'|'^':
