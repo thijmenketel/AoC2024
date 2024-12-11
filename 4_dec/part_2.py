@@ -1,3 +1,11 @@
+import sys
+import os
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.append(parent_dir)
+
+from util import timed
 from part_1 import get_input_as_string
 
 def is_MAS(string):
@@ -18,6 +26,7 @@ def count_text(text):
                 total += 1
     return total
 
+@timed
 def main():
     text = get_input_as_string('./input.txt')
     print(count_text(text))

@@ -5,7 +5,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir)
 
-from util import timer
+from util import timed
 from math import log10
 
 def get_input(filename):
@@ -36,6 +36,7 @@ def process_numbers(nums):
         idx +=1
     return nums
             
+@timed
 def main():
     data = get_input('./input.txt')
     for _ in range(25):
@@ -43,5 +44,4 @@ def main():
     print(len(data))
 
 if __name__ == "__main__":
-    with timer():
-        main()
+    main()

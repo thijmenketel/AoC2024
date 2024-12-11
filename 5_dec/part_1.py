@@ -5,7 +5,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir)
 
-from util import timer
+from util import timed
 
 def get_input(filename):
     with open(filename, 'r') as file:
@@ -36,7 +36,8 @@ def to_dict(rules):
     for first, second in rules:
         rules_dict.setdefault(first, []).append((first, second))
     return rules_dict
-            
+
+@timed
 def main():
     rules, pages = get_input('./input4.txt')
     rules_dict = to_dict(rules)
@@ -44,5 +45,4 @@ def main():
     print(sum(map(get_middle, correct_pages)))
 
 if __name__ == "__main__":
-    with timer():
-        main()
+    main()

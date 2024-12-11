@@ -1,3 +1,11 @@
+import sys
+import os
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.append(parent_dir)
+
+from util import timed
 import re
 from part_1 import get_input_as_string, mul
 
@@ -15,7 +23,7 @@ def filter_matches(matches):
         elif not dont:
             yield entry
     
-
+@timed
 def main():
     input_string = get_input_as_string('./input.txt')
     cleaned = filter_matches(get_all_matching_substrings(input_string))

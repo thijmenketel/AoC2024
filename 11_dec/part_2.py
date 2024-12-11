@@ -5,7 +5,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir)
 
-from util import timer
+from util import timed
 from functools import cache
 from part_1 import (
     get_input,
@@ -22,10 +22,10 @@ def process_number(num, count):
         return process_number(a, count-1) + process_number(b, count-1)
     return process_number(num * 2024, count-1)
 
+@timed
 def main():
     data = get_input('./input.txt')
     print(sum(map(lambda num: process_number(num, 75), data)))
 
 if __name__ == "__main__":
-    with timer():
-        main()
+    main()

@@ -7,7 +7,7 @@ sys.path.append(parent_dir)
 
 from multiprocessing import Pool
 from math import log10
-from util import timer
+from util import timed
 from part_1 import (
     get_input,
     add, mul
@@ -27,6 +27,7 @@ def is_correct_answer(line):
     answer, vars = line
     return check_answer(answer, vars[0], vars[1:])
 
+@timed
 def main():
     data = get_input('./input.txt')
     with Pool(14) as p:
@@ -34,5 +35,4 @@ def main():
     print(sum([x[0] for x, keep in zip(data.items(), filtered) if keep]))
 
 if __name__ == "__main__":
-    with timer():
-        main()
+    main()

@@ -1,3 +1,11 @@
+import sys
+import os
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.append(parent_dir)
+
+from util import timed
 
 def get_input_as_string(filename):
     with open(filename, 'r') as file:
@@ -30,6 +38,7 @@ def count_text(text):
     ]
     return sum(map(count_xmas, options))
 
+@timed
 def main():
     text = get_input_as_string('./input.txt')
     print(count_text(text))

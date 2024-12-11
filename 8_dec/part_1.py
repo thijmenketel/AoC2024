@@ -5,7 +5,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir)
 
-from util import timer
+from util import timed
 from itertools import product, permutations
 
 def print_grid(grid):
@@ -45,10 +45,10 @@ def find_antinodes(grid):
                 antinodes.add(opt)
     return antinodes
 
+@timed
 def main():
     grid = get_input('./input.txt')
     print(len(find_antinodes(grid)))
 
 if __name__ == "__main__":
-    with timer():
-        main()
+    main()

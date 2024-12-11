@@ -1,9 +1,9 @@
 import time
 
-class timer(object):
-
-    def __enter__(self):
-        self.start = time.time()
-
-    def __exit__(self, *args):
-        print(f"--- {(time.time() - self.start)*1000:.3f} ms ---")
+def timed(func):
+    def inner():
+        start = time.time()
+        func()
+        print(f"--- {(time.time() - start)*1000:.3f} ms ---")
+    
+    return inner

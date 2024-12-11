@@ -6,7 +6,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir)
 
-from util import timer
+from util import timed
 from part_1 import get_input, get_middle
 
 def get_invalid_pages(pages, rules_dict):
@@ -57,6 +57,7 @@ def to_dicts(rules):
         rules_dict_right.setdefault(second, []).append(first)
     return rules_dict_left, rules_dict_right
 
+@timed
 def main():
     rules, pages = get_input('./input.txt')
     rules_dicts = to_dicts(rules)
@@ -67,5 +68,4 @@ def main():
     print(sum(map(get_middle, sorted_pages)))
 
 if __name__ == "__main__":
-    with timer():
-        main()
+    main()

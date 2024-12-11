@@ -1,3 +1,12 @@
+import sys
+import os
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.append(parent_dir)
+
+from util import timed
+
 def get_input_as_reports(filename):
     with open(filename, 'r') as file:
         return [list(map(int, line.split())) for line in file]
@@ -11,7 +20,7 @@ def is_report_safe(report):
         if abs(a-b) > 3 or abs(a-b) < 1: return False
     return True
 
-
+@timed
 def main():
     reports = get_input_as_reports('./input.txt')
     print(len(list(filter(is_report_safe, reports))))

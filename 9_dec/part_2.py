@@ -5,7 +5,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 sys.path.append(parent_dir)
 
-from util import timer
+from util import timed
 from part_1 import get_input
 
 def format_data(data):
@@ -36,11 +36,11 @@ def format_data(data):
 def calc_checksum(data):
     return sum([idx * file_id for idx, file_id in enumerate(data) if file_id != -1])
 
+@timed
 def main():
     data = get_input('./input.txt')
     new_data = format_data(data)
     print(calc_checksum(new_data))
 
 if __name__ == "__main__":
-    with timer():
-        main()
+    main()
