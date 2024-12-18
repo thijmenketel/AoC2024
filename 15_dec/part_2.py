@@ -134,8 +134,6 @@ def try_to_move(dir, left, walls, l_boxes, r_boxes):
         else:
             return False
 
-    
-
 @timed
 def main():
     grid, moves = get_input('./input.txt')
