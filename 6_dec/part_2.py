@@ -21,7 +21,7 @@ def print_grid(grid):
     print('*' * len(grid))
 
 def test_grid(grid, pos, dir):
-    x, y = next_pos(pos, dir)
+    x, y = next_pos(pos, dir) # type: ignore
     rights = []
     while is_pos_in_grid(grid, (x, y)):
         match grid[x][y]:
@@ -32,7 +32,7 @@ def test_grid(grid, pos, dir):
                     return True
                 rights.append((dir, pos))
                 dir = turn_right(dir)
-        x, y = next_pos(pos, dir)
+        x, y = next_pos(pos, dir) # type: ignore
     return False
 
 
