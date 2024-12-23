@@ -1,9 +1,11 @@
+from functools import wraps
 import time
 
 def timed(func):
-    def inner():
+    @wraps(func)
+    def inner(*arg, **kw):
         start = time.time()
-        func()
+        res = func(*arg, **kw)
         print(f"--- {(time.time() - start)*1000:.3f} ms ---")
-    
+        return res
     return inner
