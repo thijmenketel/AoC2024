@@ -19,7 +19,7 @@ def get_input(filename):
 
 @timed
 def main():
-    conn_map = get_input('./test_input.txt')
+    conn_map = get_input('./input.txt')
     cycles = set()
     for start, cons1 in conn_map.items():
         for hop1 in cons1:
